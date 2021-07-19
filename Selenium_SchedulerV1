@@ -1,0 +1,119 @@
+package FirstProgram;
+
+import java.util.concurrent.TimeUnit;
+
+//import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+//import org.openqa.selenium.support.ui.Select;
+
+public class SelProgram {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Desktop\\Drivers\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		driver.get("https://200.200.200.203/SiteMinder/");
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		
+		driver.findElement(By.id("details-button")).click();
+		driver.findElement(By.linkText("Proceed to 200.200.200.203 (unsafe)")).click();
+		driver.findElement(By.className("form-control")).sendKeys("adminuser");
+		driver.findElement(By.name("password")).sendKeys("Volpay@300");
+		driver.findElement(By.cssSelector("body > div.container > div > div > div > div.panel-body > form > fieldset > input")).click();
+        //Thread.sleep(5000);
+        System.out.println("login successfully");
+        //Thread.sleep(8000);
+        WebDriverWait wait = new WebDriverWait(driver, 12);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),' Dashboard')]")));
+		driver.findElement(By.xpath("//span[contains(text(),' Dashboard')]")).click();
+        //WebElement w1=driver.findElement(By.xpath("//span[contains(text(),' Dashboard')]"));
+        //w1.click();
+        //Thread.sleep(5000);	
+		driver.findElement(By.xpath("//span[contains(text(),'Standing Instruction Module')]")).click();
+		//Thread.sleep(3000);	
+		driver.findElement(By.xpath("//span[contains(text(),'Scheduler')]")).click();
+		//Thread.sleep(3000);	  
+		driver.findElement(By.xpath("//span[contains(text(),'Scheduler Profile')]")).click();
+		//Thread.sleep(20000);
+		System.out.println("Scheduler Profile launched successfully");
+		//Thread.sleep(20000);
+		driver.switchTo().frame(0);
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[@title='Add New']//i[@class='fa fa-plus-square']")).click();
+		//Thread.sleep(15000);
+		System.out.println("Add new Profile launched successfully");
+		//Create Scheduler Profile
+		
+		driver.findElement(By.xpath("//input[@id='Scheduler Profile Code']")).sendKeys("AutoSch");
+		driver.findElement(By.xpath("//input[@id='Scheduler Profile Name']")).sendKeys("AutoSch");
+		driver.findElement(By.xpath("//input[@id='Scheduler Profile Desc']")).sendKeys("AutoSch");
+		//WebElement we= driver.findElement(By.xpath("//span[@id='select2-Time Zone-container']"));
+		//we.click();
+		//Select se= new Select(we);
+		//se.selectByVisibleText("Africa/Abidjan");
+		//se.selectByIndex(3);*/
+		//click("//span[@id='select2-Time Zone-container");
+		driver.findElement(By.xpath("//span[@id='select2-Time Zone-container']")).click();
+	    Thread.sleep(3000);
+	    WebElement wb = driver.findElement(By.xpath("//input[@type='search' and @aria-controls='select2-Time Zone-results']"));
+	    wb.sendKeys("IST");
+	    Thread.sleep(3000);
+	    wb.sendKeys(Keys.ENTER);
+		Thread.sleep(3000);
+		System.out.println("Timezone selection success");
+		
+		driver.findElement(By.xpath("//span[@id='select2-Status-container']")).click();
+		WebElement wb1=driver.findElement(By.xpath("//input[@type='search' and @aria-controls='select2-Status-results']"));
+		wb1.sendKeys("ACTIVE");
+		wb1.sendKeys(Keys.ENTER);
+		System.out.println("Status has been updated successfully");
+		
+		//driver.findElement(By.xpath("//input[@id='Effective From Date']")).click();
+		WebElement wb2=driver.findElement(By.xpath("//input[@id='Effective From Date']"));
+		//wb2.click();
+		wb2.sendKeys("2021-06-09");
+		wb2.sendKeys(Keys.ENTER);
+		System.out.println("Effective from date has been updated successfully");
+		
+		Thread.sleep(5000);
+		/*int sz = driver.findElements(By.tagName("iframe")).size();
+		System.out.println(sz);*/
+		//WebDriverWait wait1 = new WebDriverWait(driver, 12);
+		//wait1.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@id='select2-Minutes-d8-container' and @role='textbox' ]")));
+		driver.findElement(By.xpath("//span[@id='select2-Minutes-1y-container']")).click();
+		//driver.findElement(By.xpath("//span[@id='select2-Minutes-gi-container']")).click();
+		//driver.findElement(By.xpath("//span[@class='select2-selection__rendered' and @id='select2-Minutes-by-container']")).click();
+		/*WebElement min=driver.findElement(By.xpath("//input[@type='search' and @aria-controls='select2-Minutes-i0-results']"));
+		min.sendKeys("Every");
+		min.sendKeys(Keys.ENTER);*/
+
+		/*driver.findElement(By.xpath("//span[@id='select2-Status-container']")).click();
+		WebElement hrs=driver.findElement(By.xpath("//input[@type='search' and @aria-controls='select2-Status-results']"));
+		hrs.sendKeys("Every");
+		hrs.sendKeys(Keys.ENTER);
+		
+		driver.findElement(By.xpath("//span[@id='select2-Status-container']")).click();
+		WebElement day=driver.findElement(By.xpath("//input[@type='search' and @aria-controls='select2-Status-results']"));
+		day.sendKeys("Every");
+		day.sendKeys(Keys.ENTER);
+		
+		driver.findElement(By.xpath("//span[@id='select2-Status-container']")).click();
+		WebElement mnt=driver.findElement(By.xpath("//input[@type='search' and @aria-controls='select2-Status-results']"));
+		mnt.sendKeys("Every");
+		mnt.sendKeys(Keys.ENTER);
+		
+		driver.findElement(By.xpath("//span[@id='select2-Status-container']")).click();
+		WebElement yrs=driver.findElement(By.xpath("//input[@type='search' and @aria-controls='select2-Status-results']"));
+		yrs.sendKeys("Every");
+		yrs.sendKeys(Keys.ENTER);*/
+	}
+}
