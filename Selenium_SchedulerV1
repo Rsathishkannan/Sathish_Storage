@@ -115,5 +115,7 @@ public class SelProgram {
 		WebElement yrs=driver.findElement(By.xpath("//input[@type='search' and @aria-controls='select2-Status-results']"));
 		yrs.sendKeys("Every");
 		yrs.sendKeys(Keys.ENTER);*/
+		
+		driver.quit();
 	}
 }
